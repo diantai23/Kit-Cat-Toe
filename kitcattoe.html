@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Kit-Cat-Toe</title>
+    <link rel="stylesheet" href="/Users/diantai/Desktop/firehose-vagrant/src/kit-cat-toe/kitcattoe.scss">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/Users/diantai/Desktop/firehose-vagrant/src/kit-cat-toe/background.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Sedgwick+Ave+Display" rel="stylesheet">
+  </head>
+  <body>
+
+
+
+    <nav class="navbar">
+      <div class="col-sm-8 offset-sm-2 col-md-6 offset-md-3">
+        <a href="#"><img src="/Users/diantai/Desktop/firehose-vagrant/src/kit-cat-toe/tictactoeicon.png" class="navbar-logo" alt="tictactoe"></a>
+        <div class="navbar-title">
+          * Kit * Cat * Toe *
+        </div>
+      </div>
+      <div class="clear" />
+    </nav>
+
+
+    <div class="container" id="gradient">
+      <div class="row">
+        <div class="turn-indicator col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
+        It is Player <span id="current-player"></span>'s turn
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4" id=grid">
+        <div class="row" id="row1">
+          <div class="cell" id="box1"></div>
+          <div class="cell" id="box2"></div>
+          <div class="cell" id="box3"></div>
+        </div>
+        <div class="row" id="row2">
+          <div class="cell" id="box4"></div>
+          <div class="cell" id="box5"></div>
+          <div class="cell" id="box6"></div>
+        </div>
+        <div class="row" id="row3">
+          <div class="cell" id="box7"></div>
+          <div class="cell" id="box8"></div>
+          <div class="cell" id="box9"></div>
+        </div>
+      </div>
+    </div>
+
+    <script src="/Users/diantai/Desktop/firehose-vagrant/src/kit-cat-toe/kitcattoe.js"></script>
+  </body>
+</html>

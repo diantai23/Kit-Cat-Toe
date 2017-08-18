@@ -1,0 +1,97 @@
+@font-face {
+    font-family: 'slaytanicregular';
+    src: url('slaytanic-webfont.woff2') format('woff2'),
+         url('slaytanic-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.navbar {
+  height: 100px;
+  background-color: #38353C;
+}
+
+.navbar-logo {
+  height: 50px;
+  width: 50px;
+  border: white;
+  border-style: solid;
+  border-radius: 25px;
+  border-width: 2px;
+  display: inline-block;
+  margin-top: 0px;
+  padding-top: 0px;
+}
+
+.navbar-title {
+  color: white;
+  padding: 10px;
+  font-size: 50px;
+  font-family: 'slaytanicregular';
+  display: inline-block;
+}
+
+.turn-indicator {
+  color: white;
+  font-size: 30px;
+  text-align: center;
+  padding: 10px;
+  font-family: 'Sedgwick Ave Display', cursive;
+
+}
+
+.grid {
+  padding: 10px;
+}
+.cell {
+  height: 150px;
+  width: 150px;
+  float: left;
+  background:rgba(255,255,255,0.1)
+
+}
+
+#row2 {
+  border-bottom: 4px dashed black;
+  border-top: 4px dashed black;
+}
+
+#box2, #box5, #box8 {
+  border-left: 4px dashed black;
+  border-right: 4px dashed black;
+}
+
+#player1cat {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 20px;
+  height: 120px;
+  width: 120px;
+}
+
+#player2cat {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 15px;
+  height: 130px;
+  width: 120px;
+}
+
+body {
+ background-color: #000000;
+ padding: 0px;
+ margin: 0px;
+}
+
+#gradient {
+width: 100%;
+height: 800px;
+padding: 0px;
+margin: 0px;
+}
+
+.clear {
+  clear: both;
+}
