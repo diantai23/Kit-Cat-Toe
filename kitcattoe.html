@@ -2,15 +2,13 @@
 <html>
   <head>
     <title>Kit-Cat-Toe</title>
-    <link rel="stylesheet" href="/Users/diantai/Desktop/firehose-vagrant/src/kit-cat-toe/kitcattoe.scss">
+    <link rel="stylesheet" href="/Users/diantai/Desktop/firehose-vagrant/src/kit-cat-toe/kitcattoe.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="/Users/diantai/Desktop/firehose-vagrant/src/kit-cat-toe/background.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Sedgwick+Ave+Display" rel="stylesheet">
   </head>
   <body>
-
-
 
     <nav class="navbar">
       <div class="col-sm-8 offset-sm-2 col-md-6 offset-md-3">
@@ -22,14 +20,13 @@
       <div class="clear" />
     </nav>
 
-
     <div class="container" id="gradient">
       <div class="row">
         <div class="turn-indicator col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
         It is Player <span id="current-player"></span>'s turn
         </div>
       </div>
-      <div class="col-xs-12 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4" id=grid">
+      <div id="grid">
         <div class="row" id="row1">
           <div class="cell" id="box1"></div>
           <div class="cell" id="box2"></div>
@@ -45,9 +42,23 @@
           <div class="cell" id="box8"></div>
           <div class="cell" id="box9"></div>
         </div>
+        <img class="spraypaint pink" src="spraypaint-pink.png">
+        <img class="spraypaint orange" src="spraypaint-orange.png">
+        <img class="spraypaint purple" src="spraypaint-purple.png">
+        <img class="spraypaint green" src="spraypaint-green.png">
+        <img class="spraypaint hotpink" src="spraypaint-hotpink.png">
+        <img class="spraypaint blue" src="spraypaint-blue.png">
+        <img class="spraypaint yellow" src="spraypaint-yellow.png">
+        <img class="spraypaint red" src="spraypaint-red.png">
       </div>
     </div>
 
     <script src="/Users/diantai/Desktop/firehose-vagrant/src/kit-cat-toe/kitcattoe.js"></script>
   </body>
+
+  <footer class="footer">
+    <div class="container">
+      <span class="text-muted">Created by <a href="https://diantai23.github.io/">Dian Tai</a></span>
+    </div>
+  </footer>
 </html>

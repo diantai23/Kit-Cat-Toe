@@ -1,19 +1,21 @@
 $(".cell").click(clickedBox);
 
-var round = 0;
-document.getElementById('current-player').innerHTML = round%2 + 1;
+var round = 1;
+var currentPlayer = document.getElementById('current-player');
+currentPlayer.innerHTML = round%2;
+
 var theseHaveBeenClicked = [];
 var theseHaveBeenClickedByPlayerOne = [];
 var theseHaveBeenClickedByPlayerTwo = [];
 
 function clickedBox() {
   if (!isNaN(round) && !theseHaveBeenClicked.includes(event.currentTarget.id)) {  // makes sure only blank tiles can be selected. Only allows loop to execute if we are in a valid round of the game
-    document.getElementById('current-player').innerHTML = round%2 + 1;  // change turn indicator to reflect current player's number
-    if (round%2 === 0) {  // if it is player one's turn, use player one's cat icon
-      $(this).append('<img id="player1cat" src="/Users/diantai/Desktop/firehose-vagrant/src/kit-cat-toe/playeronecat.png">');
+    currentPlayer.innerHTML = round%2 + 1;  // change turn indicator to reflect current player's number
+    if (round%2 === 0) {  // if it is p1's turn, append player one's cat icon in box and update array of boxes p2 has clicked
+      $(this).append('<img class="player1cat" src="/Users/diantai/Desktop/firehose-vagrant/src/kit-cat-toe/playeronecat.png">');
       theseHaveBeenClickedByPlayerOne.push(event.currentTarget.id);
-    } else if (round%2 === 1) {  // if it is player two's turn, use player two's cat icon
-      $(this).append('<img id="player2cat" src="/Users/diantai/Desktop/firehose-vagrant/src/kit-cat-toe/playertwocat.png">');
+    } else if (round%2 === 1) {  // if it is p2's turn, append player two's cat icon in box and update array of boxes p2 has clicked
+      $(this).append('<img class="player2cat" src="/Users/diantai/Desktop/firehose-vagrant/src/kit-cat-toe/playertwocat.png">');
       theseHaveBeenClickedByPlayerTwo.push(event.currentTarget.id);
     }
     theseHaveBeenClicked.push(event.currentTarget.id);  // update master list of tiles that have been selected
@@ -47,14 +49,36 @@ function clickedBox() {
         }
 
         if ((threeInARowPlayerOne === 3) || (threeInARowPlayerTwo === 3)) {  // if there is an exact match for a winning combination of three,
-          //console.log("YOU WIN");  // you win !!!!
-          document.querySelector('.turn-indicator').innerHTML = "Player Wins";  // change turn indicator to reflect current player's number
-
+          //  determine which paint splatter effect to make visible
+          if (aLineOfBoxes === 0) {
+            $('.pink').css("visibility", "visible");
+          } else if (aLineOfBoxes === 1) {
+            $('.orange').css("visibility", "visible");
+          } else if (aLineOfBoxes === 2) {
+            $('.purple').css("visibility", "visible");
+          } else if (aLineOfBoxes === 3) {
+            $('.yellow').css("visibility", "visible");
+          } else if (aLineOfBoxes === 4) {
+            $('.blue').css("visibility", "visible");
+          } else if (aLineOfBoxes === 5) {
+            $('.red').css("visibility", "visible");
+          } else if (aLineOfBoxes === 6) {
+            $('.hotpink').css("visibility", "visible");
+          } else if (aLineOfBoxes === 7) {
+            $('.green').css("visibility", "visible");
+          }
+          document.querySelector('.turn-indicator').innerHTML = "Player " +  currentPlayer.innerHTML + " Wins!";  // notify player of win
           aBox = aLineOfBoxes = round = NaN;  // set all variables to NaN to exit all loops
         }
         aBox++;
       }
       aLineOfBoxes++;
+    }
+    //  in case of a draw
+    if ((round) && (theseHaveBeenClicked.length === 9)) {
+      document.querySelector('.turn-indicator').innerHTML = "It's a Draw :\(";
+      $(".player1cat").css("-webkit-animation", "rotation 2s infinite linear");
+      $(".player2cat").css("-webkit-animation", "rotation 2s infinite linear");
     }
     round++;
   }
