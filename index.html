@@ -2,27 +2,27 @@
 <html>
   <head>
     <title>Kit-Cat-Toe</title>
-    <link rel="stylesheet" href="/Users/diantai/Desktop/firehose-vagrant/src/kit-cat-toe/kitcattoe.css">
+    <link rel="stylesheet" href="kitcattoe.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="/Users/diantai/Desktop/firehose-vagrant/src/kit-cat-toe/background.js"></script>
+    <script src="background.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Sedgwick+Ave+Display" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
   </head>
-  <body>
+  <body class="wrap">
 
     <nav class="navbar">
-      <div class="col-sm-8 offset-sm-2 col-md-6 offset-md-3">
-        <a href="#"><img src="/Users/diantai/Desktop/firehose-vagrant/src/kit-cat-toe/tictactoeicon.png" class="navbar-logo" alt="tictactoe"></a>
-        <div class="navbar-title">
-          * Kit * Cat * Toe *
-        </div>
+       <div class="navbar-contents">
+        <a href="http://kit-cat-toe.pancakeapps.com/"><img src="logo.png" class="navbar-logo" alt="tictactoe"></a>
+        <a href="http://kit-cat-toe.pancakeapps.com/"><img src="title.png" class="navbar-title" alt="kitcattoe"></a>
       </div>
       <div class="clear" />
     </nav>
 
     <div class="container" id="gradient">
       <div class="row">
-        <div class="turn-indicator col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
+        <div class="turn-indicator">
         It is Player <span id="current-player"></span>'s turn
         </div>
       </div>
@@ -50,15 +50,19 @@
         <img class="spraypaint blue" src="spraypaint-blue.png">
         <img class="spraypaint yellow" src="spraypaint-yellow.png">
         <img class="spraypaint red" src="spraypaint-red.png">
+        <img class="play-again" src="play-again.png">
       </div>
     </div>
+    <script src="kitcattoe.js"></script>
 
-    <script src="/Users/diantai/Desktop/firehose-vagrant/src/kit-cat-toe/kitcattoe.js"></script>
   </body>
 
   <footer class="footer">
     <div class="container">
       <span class="text-muted">Created by <a href="https://diantai23.github.io/">Dian Tai</a></span>
+      <span class="social-links"><a href="https://github.com/diantai23/Kit-Cat-Toe">
+        <i class="fa fa-github-alt fa-lg" aria-hidden="true"></i>
+      </a></span>
     </div>
   </footer>
 </html>

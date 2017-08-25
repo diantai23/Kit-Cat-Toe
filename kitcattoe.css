@@ -7,38 +7,38 @@
 }
 
 .navbar {
-  height: 100px;
+  height: 105px;
   background-color: #38353C;
-  border-radius: 0px;
+}
+
+.navbar-contents {
+  width: 700px;
+  margin: 0 auto;
+  padding-left: 5%;
 }
 
 .navbar-logo {
-  height: 50px;
-  width: 50px;
+  height: 75px;
+  width: 75px;
   border: white;
-  border-style: solid;
+  border-style: dashed;
   border-radius: 25px;
   border-width: 2px;
-  display: inline-block;
   margin-top: 0px;
   padding-top: 0px;
 }
 
 .navbar-title {
-  color: white;
   padding: 10px;
-  font-size: 50px;
-  font-family: 'slaytanicregular';
-  display: inline-block;
+  width: 70%;
 }
 
 .turn-indicator {
   color: white;
   font-size: 30px;
   text-align: center;
-  padding: 10px;
+  padding: 40px;
   font-family: 'Sedgwick Ave Display';
-
 }
 
 #grid {
@@ -51,9 +51,7 @@
   height: 150px;
   width: 150px;
   float: left;
-  background:rgba(255,255,255,0.1)
   z-index: 1;
-
 }
 
 #box4, #box5, #box6  {
@@ -68,11 +66,8 @@
 
 .player1cat {
   display: block;
-  margin-left: 20px;
-  margin-right: 20px;
-  padding-top: 30px;
-  height: 120px;
-  width: 120px;
+  margin-left: 12px;
+  padding-top: 23px;
   position: absolute;
   z-index: 2;
 }
@@ -81,9 +76,8 @@
   display: block;
   margin-left: auto;
   margin-right: auto;
-  padding-top: 15px;
-  height: 130px;
-  width: 120px;
+  padding-top: 18px;
+  margin-left: 8px;
   position: absolute;
   z-index: 2;
 }
@@ -145,6 +139,16 @@
   left: 255px;
 }
 
+.play-again {
+  width: 75%;
+  opacity: 0.3;
+  position: absolute;
+  visibility: hidden;
+  z-index: 4;
+  top: 140px;
+  left: 40px;
+}
+
 body {
  background-color: #000000;
  padding: 0px;
@@ -152,19 +156,38 @@ body {
 }
 
 #gradient {
-width: 100%;
-height: 800px;
-padding: 0px;
-margin: 0px;
+  width: 100%;
+  height: 700px;
+  padding: 0px;
+  margin: 0px;
 }
 
 .footer {
   background-color: black;
   text-align: center;
   font-family: 'Sedgwick Ave Display';
+  height: 40px;
+  font-size: 18px;
+  padding: 7px;
+}
 
+.social-links a {
+  position: absolute;
+  margin-right: 10px;
+  right: 0px;
+  width: 30px;
+  color: white;
+}
+
+.social-links a:hover {
+  color: white;
+  text-decoration: none;
 }
 
 .clear {
   clear: both;
+}
+
+.wrap {
+  min-height: calc(100vh - 89px);
 }
