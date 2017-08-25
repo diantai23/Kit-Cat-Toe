@@ -1,10 +1,4 @@
-@font-face {
-    font-family: 'slaytanicregular';
-    src: url('slaytanic-webfont.woff2') format('woff2'),
-         url('slaytanic-webfont.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
+
 
 .navbar {
   height: 105px;
