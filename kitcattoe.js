@@ -1,101 +1,50 @@
-var round = 1;
-var currentPlayer = document.getElementById('current-player');
-currentPlayer.innerHTML = round%2;
+var currentPlayerElement = document.getElementById('current-player');
+var currentPlayer = 1;
+currentPlayerElement.innerHTML = currentPlayer;
 
-var theseHaveBeenClicked = [];
-var theseHaveBeenClickedByPlayerOne = [];
-var theseHaveBeenClickedByPlayerTwo = [];
-var winningCombinations = [
-  // rows
-  [box1, box2, box3],
-  [box4, box5, box6],
-  [box7, box8, box9],
-  // columns
-  [box1, box4, box7],
-  [box2, box5, box8],
-  [box3, box6, box9],
-  // diagonals
-  [box1, box5, box9],
-  [box3, box5, box7]
-];
+var round = 1;
+var masterClickedList = [];
+var playerOneBoard = createVirtualBoard(3);  // future feature: add user option for board size
+var playerTwoBoard = createVirtualBoard(3);
 
 
 $(".cell").click(clickedBox);
 
 function clickedBox() {
+  clickedItem = $(this);
+  clickedItemID = clickedItem.attr('id');
+
   if (theGameIsStillGoingOn() && aBlankBoxIsSelected() ) {
     updateTurnIndicator();
-
-    if (round%2 === 0) {  // if it is p1's turn, append player one's cat icon in box and update array of boxes p2 has clicked
-      $(this).append('<img class="player1cat" src="playeronecat.png">');
-      theseHaveBeenClickedByPlayerOne.push(event.currentTarget.id);
-    } else if (round%2 === 1) {  // if it is p2's turn, append player two's cat icon in box and update array of boxes p2 has clicked
-      $(this).append('<img class="player2cat" src="playertwocat.png">');
-      theseHaveBeenClickedByPlayerTwo.push(event.currentTarget.id);
-    }
-
+    updateGameboardWithCat();
     updateMasterClickedList();
-
-    for (var aLineOfBoxes = 0; aLineOfBoxes < 8; aLineOfBoxes++) {
-      resetTally();
-      for (var aBox = 0; aBox < 3; aBox++) {
-        updateTally();
-        if (weHaveAWinner() ) {
-          updateGameboardWithSpraypaint();
-          notifyPlayerOfWin();
-          exitAllLoops();
-          playAgain();
-        }
-      }
+    updateVirtualBoard();
+    if (checkForWin(playerOneBoard)) {
+      weHaveAWinner(playerOneBoard);
+    } else if (checkForWin(playerTwoBoard)) {
+      weHaveAWinner(playerTwoBoard);
     }
     checkForDraw();
     round++;
   }
-
-
-
-
-  function updateGameboardWithSpraypaint() {
-    if (aLineOfBoxes === 0) {
-      $('.pink').css("visibility", "visible");
-    } else if (aLineOfBoxes === 1) {
-      $('.orange').css("visibility", "visible");
-    } else if (aLineOfBoxes === 2) {
-      $('.purple').css("visibility", "visible");
-    } else if (aLineOfBoxes === 3) {
-      $('.yellow').css("visibility", "visible");
-    } else if (aLineOfBoxes === 4) {
-      $('.blue').css("visibility", "visible");
-    } else if (aLineOfBoxes === 5) {
-      $('.red').css("visibility", "visible");
-    } else if (aLineOfBoxes === 6) {
-      $('.hotpink').css("visibility", "visible");
-    } else if (aLineOfBoxes === 7) {
-      $('.green').css("visibility", "visible");
-    }
-  }
-
-  function resetTally() {
-    threeInARowPlayerOne = 0;
-    threeInARowPlayerTwo = 0;
-  }
-
-  function updateTally() {
-    currentBox = String(winningCombinations[aLineOfBoxes][aBox].id);  // the ID of the current box we are looking at
-    if ((theseHaveBeenClickedByPlayerOne.length >= 3) && (theseHaveBeenClickedByPlayerOne.includes(currentBox))) {  // if at least three tiles have been selected by one player, and one of those tiles includes the current box,
-      threeInARowPlayerOne++; //  then increment counter.
-    } else if ((theseHaveBeenClickedByPlayerTwo.length >= 3) && (theseHaveBeenClickedByPlayerTwo.includes(currentBox))) {
-      threeInARowPlayerTwo++;
-    }
-  }
-
-  function weHaveAWinner() {
-    return (threeInARowPlayerOne === 3) || (threeInARowPlayerTwo === 3);
-  }
 }
 
-function updateMasterClickedList() {
-  theseHaveBeenClicked.push(event.currentTarget.id);  // update master list of tiles that have been selected
+function weHaveAWinner(playerBoard) {
+  updateGameboardWithSpraypaint(playerBoard);
+  notifyPlayerOfWin();
+  exitAllLoops();
+  playAgain();
+}
+
+function createVirtualBoard(rows) {
+  var columns = rows;  // game board can only be square
+  var virtualBoard = {};
+  for (i = 0, boxNumber = 1; i < rows; i++) {
+    for (j = 0; j < columns; j++, boxNumber++) {
+      virtualBoard["box" + boxNumber] = false;
+    }
+  }
+  return virtualBoard;
 }
 
 function theGameIsStillGoingOn() {
@@ -103,28 +52,107 @@ function theGameIsStillGoingOn() {
 }
 
 function aBlankBoxIsSelected() {
-  return !theseHaveBeenClicked.includes(event.currentTarget.id);
+  return !masterClickedList.includes(event.currentTarget.id);
 }
 
 function updateTurnIndicator() {
-  currentPlayer.innerHTML = round%2 + 1;
+  currentPlayerElement.innerHTML = round%2 + 1;
 }
 
-function checkForDraw() {
-  if ((round) && (theseHaveBeenClicked.length === 9)) {
-    document.querySelector('.turn-indicator').innerHTML = "It's a Draw :\(";
-    $(".player1cat").css("-webkit-animation", "rotation 2s infinite linear");
-    $(".player2cat").css("-webkit-animation", "rotation 2s infinite linear");
-    playAgain();
+function updateGameboardWithCat() {
+  if (round%2 + 1 === 1) {  // if it is p1's turn, append player one's cat icon in box and update array of boxes p2 has clicked
+    clickedItem.append('<img class="player1cat" src="playeronecat.png">');
+  } else if (round%2 + 1 === 2) {  // if it is p2's turn, append player two's cat icon in box and update array of boxes p2 has clicked
+    clickedItem.append('<img class="player2cat" src="playertwocat.png">');
   }
 }
 
-function exitAllLoops() {
-  aBox = aLineOfBoxes = round = NaN;
+function updateMasterClickedList() {
+  masterClickedList.push(event.currentTarget.id);  // update master list of tiles that have been selected
+
+}
+
+function updateVirtualBoard() {
+  if (currentPlayer === 1) {
+    playerOneBoard[clickedItemID] = true;
+  } else if (currentPlayer === 2) {
+    playerTwoBoard[clickedItemID] = true;
+  }
+  currentPlayer = round%2 + 1
+}
+
+function determineClickCoordinates(playerBoard) {
+  var clickedItemIDNumber = clickedItemID.replace("box","");
+
+  var row = Math.floor(clickedItemIDNumber/3 - 0.000001);
+  var column = clickedItemIDNumber%3 - 1;
+
+  if ( column === -1) {
+    column = 2;
+  }
+
+  return [row, column];
+}
+
+function arraysEqual(array1, array2) {
+  for(var i = array1.length; i--;) {
+    if(array1[i] !== array2[i]) {
+      return false;
+    }
+  }
+  return true;
+}
+
+function checkForWin(playerBoard, rows) {
+  clickCoordinates = determineClickCoordinates();
+
+  if ( (clickCoordinates[0] === 0) && (playerBoard['box1'] === true) && (playerBoard['box2'] === true) && (playerBoard['box3'] === true) ) {
+    return 1;
+  } else if ( (clickCoordinates[0] === 1) && (playerBoard['box4'] === true) && (playerBoard['box5'] === true) && (playerBoard['box6'] === true) ) {
+    return 2;
+  } else if ( (clickCoordinates[0] === 2) && (playerBoard['box7'] === true) && (playerBoard['box8'] === true) && (playerBoard['box9'] === true) ) {
+    return 3;
+  } else if ( (clickCoordinates[1] === 0) && (playerBoard['box1'] === true) && (playerBoard['box4'] === true) && (playerBoard['box7'] === true) ) {
+    return 4;
+  } else if ( (clickCoordinates[1] === 1) && (playerBoard['box2'] === true) && (playerBoard['box5'] === true) && (playerBoard['box8'] === true) ) {
+    return 5;
+  } else if ( (clickCoordinates[1] === 2) && (playerBoard['box3'] === true) && (playerBoard['box6'] === true) && (playerBoard['box9'] === true) ) {
+    return 6;
+  } else if ( ( arraysEqual(clickCoordinates, [0,0] ) || arraysEqual(clickCoordinates, [1,1]) || arraysEqual(clickCoordinates, [2,2]) ) && (playerBoard['box1'] === true) && (playerBoard['box5'] === true) && (playerBoard['box9'] === true) ) {
+    return 7;
+  } else if ( ( arraysEqual(clickCoordinates, [0,2] ) || arraysEqual(clickCoordinates, [1,1]) || arraysEqual(clickCoordinates, [2,0]) ) && (playerBoard['box3'] === true) && (playerBoard['box5'] === true) && (playerBoard['box7'] === true) ) {
+    return 8;
+  } else {
+    return false;
+  }
+}
+
+function updateGameboardWithSpraypaint(playerBoard) {
+  if (checkForWin(playerBoard) === 1) {
+    $('.pink').css("visibility", "visible");
+  } else if (checkForWin(playerBoard) === 2) {
+    $('.orange').css("visibility", "visible");
+  } else if (checkForWin(playerBoard) === 3) {
+    $('.purple').css("visibility", "visible");
+  } else if (checkForWin(playerBoard) === 4) {
+    $('.yellow').css("visibility", "visible");
+  } else if (checkForWin(playerBoard) === 5) {
+    $('.blue').css("visibility", "visible");
+  } else if (checkForWin(playerBoard) === 6) {
+    $('.red').css("visibility", "visible");
+  } else if (checkForWin(playerBoard) === 7) {
+    $('.hotpink').css("visibility", "visible");
+  } else if (checkForWin(playerBoard) === 8) {
+    $('.green').css("visibility", "visible");
+  }
 }
 
 function notifyPlayerOfWin() {
-  document.querySelector('.turn-indicator').innerHTML = "Player " +  currentPlayer.innerHTML + " Wins!";  // notify player of win
+  document.querySelector('.turn-indicator').innerHTML = "Player " +  (3-currentPlayer) + " Wins!";  // notify player of win
+}
+
+function exitAllLoops() {
+  round = NaN;
 }
 
 function playAgain () {
@@ -141,5 +169,15 @@ function playAgain () {
     // $('.player1cat').css("visibility", "hidden");
     // $('.player2cat').css("visibility", "hidden");
     // $('.play-again').css("visibility", "hidden");
+    // round = 1;
   })
+}
+
+function checkForDraw() {
+  if ((round) && (masterClickedList.length === 9)) {
+    document.querySelector('.turn-indicator').innerHTML = "It's a Draw :\(";
+    $(".player1cat").css("-webkit-animation", "rotation 2s infinite linear");
+    $(".player2cat").css("-webkit-animation", "rotation 2s infinite linear");
+    playAgain();
+  }
 }
